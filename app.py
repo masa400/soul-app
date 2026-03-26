@@ -3,6 +3,23 @@ import streamlit as st
 import matplotlib.pyplot as plt
 # import japanize_matplotlib
 
+import math
+import os
+import streamlit as st
+import matplotlib.pyplot as plt
+import matplotlib as mpl
+from matplotlib import font_manager
+
+# Windowsの日本語フォントを直接指定
+font_path = r"C:\Windows\Fonts\msgothic.ttc"
+if os.path.exists(font_path):
+    font_prop = font_manager.FontProperties(fname=font_path)
+    mpl.rcParams["font.family"] = font_prop.get_name()
+else:
+    mpl.rcParams["font.family"] = "MS Gothic"
+
+mpl.rcParams["axes.unicode_minus"] = False
+
 st.set_page_config(page_title="魂の設計図", layout="centered")
 
 SIGNS = ["牡羊", "牡牛", "双子", "蟹", "獅子", "乙女", "天秤", "蠍", "射手", "山羊", "水瓶", "魚"]
