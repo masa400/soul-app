@@ -125,3 +125,8 @@ if st.button("鑑定を生成"):
     st.pyplot(fig)
 
     st.markdown(build_reading(name))
+
+import matplotlib as mpl
+
+mpl.rcParams["font.family"] = "Yu Gothic"
+mpl.rcParams["axes.unicode_minus"] = False
