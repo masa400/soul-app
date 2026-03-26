@@ -108,17 +108,6 @@ def draw_circle_chart(positions):
             fontproperties=font_prop
         )
 
-    ax.text(
-        0, 1.08, "ホロスコープ（円形表示版）",
-        ha="center", fontsize=13, fontweight="bold",
-        fontproperties=font_prop
-    )
-    ax.text(
-        0, -1.08, "※ 現在は見た目調整版のため、天体位置は仮表示です",
-        ha="center", fontsize=9, color="gray",
-        fontproperties=font_prop
-    )
-
     plt.tight_layout()
     return fig
 
@@ -160,7 +149,9 @@ lat = st.number_input("緯度", value=35.68)
 lon = st.number_input("経度", value=139.76)
 
 if st.button("鑑定を生成"):
-    st.subheader("ホロスコープ")
+    st.subheader("ホロスコープ（円形表示版）")
+    st.caption("※ 現在は見た目調整版のため、天体位置は仮表示です")
+
     fig = draw_circle_chart(DEMO_POSITIONS)
     st.pyplot(fig)
 
