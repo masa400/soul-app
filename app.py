@@ -9,9 +9,17 @@ from matplotlib import font_manager
 font_path = r"C:\Windows\Fonts\msgothic.ttc"
 if os.path.exists(font_path):
     font_prop = font_manager.FontProperties(fname=font_path)
+else:
+    font_path = r"C:\Windows\Fonts\meiryo.ttc"
+    if os.path.exists(font_path):
+        font_prop = font_manager.FontProperties(fname=font_path)
+    else:
+        font_prop = None
+
+if font_prop is not None:
     mpl.rcParams["font.family"] = font_prop.get_name()
 else:
-    mpl.rcParams["font.family"] = "MS Gothic"
+    mpl.rcParams["font.family"] = "sans-serif"
 
 mpl.rcParams["axes.unicode_minus"] = False
 
@@ -27,7 +35,6 @@ PLANET_COLORS = {
     "火星": "#e67e22",
 }
 
-# 仮表示用の位置
 DEMO_POSITIONS = {
     "太陽": 278,
     "月": 96,
@@ -62,13 +69,23 @@ def draw_circle_chart(positions):
     for i, sign in enumerate(SIGNS):
         lon = i * 30 + 15
         x, y = pol(lon, 0.88)
-        ax.text(x, y, sign, ha="center", va="center", fontsize=11, fontweight="bold")
+        ax.text(
+            x, y, sign,
+            ha="center", va="center",
+            fontsize=11, fontweight="bold",
+            fontproperties=font_prop
+        )
 
     # ハウス番号
     for i in range(12):
         lon = i * 30 + 15
         x, y = pol(lon, 0.33)
-        ax.text(x, y, f"{i+1}", ha="center", va="center", fontsize=9, color="gray")
+        ax.text(
+            x, y, f"{i+1}",
+            ha="center", va="center",
+            fontsize=9, color="gray",
+            fontproperties=font_prop
+        )
 
     # 惑星配置
     used = []
@@ -84,10 +101,23 @@ def draw_circle_chart(positions):
         x, y = pol(lon, r)
         ax.plot(x, y, "o", markersize=8, color=PLANET_COLORS.get(name, "black"))
         tx, ty = pol(lon, r + 0.08)
-        ax.text(tx, ty, name, ha="center", va="center", fontsize=10)
+        ax.text(
+            tx, ty, name,
+            ha="center", va="center",
+            fontsize=10,
+            fontproperties=font_prop
+        )
 
-    ax.text(0, 1.08, "ホロスコープ（円形表示版）", ha="center", fontsize=13, fontweight="bold")
-    ax.text(0, -1.08, "※ 現在は見た目調整版のため、天体位置は仮表示です", ha="center", fontsize=9, color="gray")
+    ax.text(
+        0, 1.08, "ホロスコープ（円形表示版）",
+        ha="center", fontsize=13, fontweight="bold",
+        fontproperties=font_prop
+    )
+    ax.text(
+        0, -1.08, "※ 現在は見た目調整版のため、天体位置は仮表示です",
+        ha="center", fontsize=9, color="gray",
+        fontproperties=font_prop
+    )
 
     plt.tight_layout()
     return fig
@@ -135,3 +165,5 @@ if st.button("鑑定を生成"):
     st.pyplot(fig)
 
     st.markdown(build_reading(name))
+
+
