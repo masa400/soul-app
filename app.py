@@ -149,9 +149,8 @@ lat = st.number_input("緯度", value=35.68)
 lon = st.number_input("経度", value=139.76)
 
 if st.button("鑑定を生成"):
-    st.subheader("ホロスコープ（円形表示版）")
-    st.caption("※ 現在は見た目調整版のため、天体位置は仮表示です")
-
+   st.subheader("ホロスコープ（円形表示版）")
+st.caption("※ 現在は見た目調整版のため、天体位置は仮表示です")
     fig = draw_circle_chart(DEMO_POSITIONS)
     st.pyplot(fig)
 
