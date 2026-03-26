@@ -1,6 +1,7 @@
 import math
 import streamlit as st
 import matplotlib.pyplot as plt
+# import japanize_matplotlib
 
 st.set_page_config(page_title="魂の設計図", layout="centered")
 
