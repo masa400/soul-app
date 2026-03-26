@@ -1,9 +1,4 @@
 import math
-import streamlit as st
-import matplotlib.pyplot as plt
-# import japanize_matplotlib
-
-import math
 import os
 import streamlit as st
 import matplotlib.pyplot as plt
@@ -33,7 +28,6 @@ PLANET_COLORS = {
 }
 
 # 仮表示用の位置
-# ※ いまはpyswisseph未導入なので固定値
 DEMO_POSITIONS = {
     "太陽": 278,
     "月": 96,
@@ -70,7 +64,7 @@ def draw_circle_chart(positions):
         x, y = pol(lon, 0.88)
         ax.text(x, y, sign, ha="center", va="center", fontsize=11, fontweight="bold")
 
-    # ハウス番号風表示（見た目用）
+    # ハウス番号
     for i in range(12):
         lon = i * 30 + 15
         x, y = pol(lon, 0.33)
@@ -81,7 +75,6 @@ def draw_circle_chart(positions):
     for name, lon in positions.items():
         r = 0.64
 
-        # 近いものを少しずらす
         for prev_lon, prev_r in used:
             if abs(((lon - prev_lon + 180) % 360) - 180) < 8:
                 r = prev_r - 0.06
@@ -142,8 +135,3 @@ if st.button("鑑定を生成"):
     st.pyplot(fig)
 
     st.markdown(build_reading(name))
-
-import matplotlib as mpl
-
-mpl.rcParams["font.family"] = "Yu Gothic"
-mpl.rcParams["axes.unicode_minus"] = False
